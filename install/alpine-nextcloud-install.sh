@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
@@ -53,7 +53,7 @@ $STD apk add nextcloud-mysql mariadb mariadb-client
 $STD mysql_install_db --user=mysql --datadir=/var/lib/mysql
 $STD service mariadb start
 $STD rc-update add mariadb
-mysql -uroot -p"$ADMIN_PASS" -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '$ADMIN_PASS' WITH GRANT OPTION; DELETE FROM mysql.user WHERE User=''; DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); DROP DATABASE test; DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'; CREATE DATABASE $DB_NAME; GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS'; GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'localhost.localdomain' IDENTIFIED BY '$DB_PASS'; FLUSH PRIVILEGES;"
+mysql -uroot -p"$ADMIN_PASS" -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '$ADMIN_PASS' WITH GRANT OPTION; DELETE FROM mysql.user WHERE User=''; DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); DROP DATABASE test; DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'; CREATE DATABASE $DB_NAME; GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS'; GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'localhost.localdoexperimental' IDENTIFIED BY '$DB_PASS'; FLUSH PRIVILEGES;"
 $STD apk del mariadb-client
 msg_ok "Installed MySQL Database"
 
@@ -63,7 +63,7 @@ echo "" >>~/nextcloud.creds
 echo -e "Nextcloud Admin Username: \e[32m$ADMIN_USER\e[0m" >>~/nextcloud.creds
 echo -e "Nextcloud Admin Password: \e[32m$ADMIN_PASS\e[0m (Initially enter twice)" >>~/nextcloud.creds
 $STD apk add nextcloud-initscript
-$STD openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout /etc/ssl/private/nextcloud-selfsigned.key -out /etc/ssl/certs/nextcloud-selfsigned.crt -subj "/C=US/O=Nextcloud/OU=Domain Control Validated/CN=nextcloud.local"
+$STD openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout /etc/ssl/private/nextcloud-selfsigned.key -out /etc/ssl/certs/nextcloud-selfsigned.crt -subj "/C=US/O=Nextcloud/OU=Doexperimental Control Validated/CN=nextcloud.local"
 cat <<'EOF' >/usr/share/webapps/nextcloud/config/config.php
 <?php
 $CONFIG = array (
@@ -175,7 +175,7 @@ msg_ok "Started Services"
 msg_info "Start Nextcloud Setup-Wizard"
 echo -e "export VISUAL=nano\nexport EDITOR=nano" >>/etc/profile
 cd /usr/share/webapps/nextcloud
-$STD su nextcloud -s /bin/sh -c "php82 occ maintenance:install \
+$STD su nextcloud -s /bin/sh -c "php82 occ experimentaltenance:install \
 --database='mysql' --database-name $DB_NAME \
 --database-user '$DB_USER' --database-pass '$DB_PASS' \
 --admin-user '$ADMIN_USER' --admin-pass '$ADMIN_PASS' \

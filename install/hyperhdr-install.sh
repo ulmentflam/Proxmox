@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -23,7 +23,7 @@ msg_ok "Installed Dependencies"
 msg_info "Installing HyperHDR"
 curl -fsSL https://awawa-dev.github.io/hyperhdr.public.apt.gpg.key >/usr/share/keyrings/hyperhdr.public.apt.gpg.key
 chmod go+r /usr/share/keyrings/hyperhdr.public.apt.gpg.key
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hyperhdr.public.apt.gpg.key] https://awawa-dev.github.io $(awk -F= '/VERSION_CODENAME/ {print $2}' /etc/os-release) main" >/etc/apt/sources.list.d/hyperhdr.list
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hyperhdr.public.apt.gpg.key] https://awawa-dev.github.io $(awk -F= '/VERSION_CODENAME/ {print $2}' /etc/os-release) experimental" >/etc/apt/sources.list.d/hyperhdr.list
 $STD apt-get update
 $STD apt-get install -y hyperhdr
 msg_ok "Installed HyperHDR"

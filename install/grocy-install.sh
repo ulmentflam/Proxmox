@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -23,7 +23,7 @@ msg_ok "Installed Dependencies"
 msg_info "Installing PHP8.2"
 VERSION="$(awk -F'=' '/^VERSION_CODENAME=/{ print $NF }' /etc/os-release)"
 curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
-echo -e "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $VERSION main" >/etc/apt/sources.list.d/php.list
+echo -e "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $VERSION experimental" >/etc/apt/sources.list.d/php.list
 $STD apt-get update
 $STD apt-get install -y php8.2
 $STD apt-get install -y libapache2-mod-php8.2

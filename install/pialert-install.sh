@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -57,7 +57,7 @@ $STD pip3 install pyunifi
 msg_ok "Installed Python Dependencies"
 
 msg_info "Installing Pi.Alert"
-curl -sL https://github.com/leiweibau/Pi.Alert/raw/main/tar/pialert_latest.tar | tar xvf - -C /opt >/dev/null 2>&1
+curl -sL https://github.com/leiweibau/Pi.Alert/raw/experimental/tar/pialert_latest.tar | tar xvf - -C /opt >/dev/null 2>&1
 rm -rf /var/lib/ieee-data /var/www/html/index.html
 sed -i -e 's#^sudo cp -n /usr/share/ieee-data/.* /var/lib/ieee-data/#\# &#' -e '/^sudo mkdir -p 2_backup$/s/^/# /' -e '/^sudo cp \*.txt 2_backup$/s/^/# /' -e '/^sudo cp \*.csv 2_backup$/s/^/# /' /opt/pialert/back/update_vendors.sh
 mv /var/www/html/index.lighttpd.html /var/www/html/index.lighttpd.html.old
@@ -76,7 +76,7 @@ done
 sed -i 's#PIALERT_PATH\s*=\s*'\''/home/pi/pialert'\''#PIALERT_PATH           = '\''/opt/pialert'\''#' /opt/pialert/config/pialert.conf
 sed -i 's/$HOME/\/opt/g' /opt/pialert/install/pialert.cron
 crontab /opt/pialert/install/pialert.cron
-echo "bash -c \"\$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)\" -s --lxc" >/usr/bin/update
+echo "bash -c \"\$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/experimental/install/pialert_update.sh)\" -s --lxc" >/usr/bin/update
 chmod +x /usr/bin/update
 echo "python3 /opt/pialert/back/pialert.py 1" >/usr/bin/scan
 chmod +x /usr/bin/scan

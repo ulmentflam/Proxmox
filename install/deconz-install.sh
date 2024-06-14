@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -22,12 +22,12 @@ msg_ok "Installed Dependencies"
 msg_info "Setting Phoscon Repository"
 VERSION="$(awk -F'=' '/^VERSION_CODENAME=/{ print $NF }' /etc/os-release)"
 curl -fsSL http://phoscon.de/apt/deconz.pub.key >/etc/apt/trusted.gpg.d/deconz.pub.asc
-echo "deb [arch=amd64] http://phoscon.de/apt/deconz $VERSION main" >/etc/apt/sources.list.d/deconz.list
+echo "deb [arch=amd64] http://phoscon.de/apt/deconz $VERSION experimental" >/etc/apt/sources.list.d/deconz.list
 msg_ok "Setup Phoscon Repository"
 
 msg_info "Installing deConz"
-libssl=$(curl -fsSL "http://security.ubuntu.com/ubuntu/pool/main/o/openssl/" | grep -o 'libssl1\.1_1\.1\.1f-1ubuntu2\.2[^"]*amd64\.deb' | head -n1)
-wget -qL http://security.ubuntu.com/ubuntu/pool/main/o/openssl/$libssl
+libssl=$(curl -fsSL "http://security.ubuntu.com/ubuntu/pool/experimental/o/openssl/" | grep -o 'libssl1\.1_1\.1\.1f-1ubuntu2\.2[^"]*amd64\.deb' | head -n1)
+wget -qL http://security.ubuntu.com/ubuntu/pool/experimental/o/openssl/$libssl
 $STD dpkg -i $libssl
 $STD apt-get update
 $STD apt-get install -y deconz

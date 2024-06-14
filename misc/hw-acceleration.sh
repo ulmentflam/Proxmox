@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 # Execute within the Proxmox shell
@@ -91,14 +91,14 @@ if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
   msg_info "Installing Hardware Acceleration (non-free)"
   pct exec ${privileged_container} -- bash -c "cat <<EOF >/etc/apt/sources.list.d/non-free.list
 
-deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
-deb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian bookworm experimental contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian bookworm experimental contrib non-free non-free-firmware
 
-deb http://deb.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
-deb-src http://deb.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian-security bookworm-security experimental contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian-security bookworm-security experimental contrib non-free non-free-firmware
 
-deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware
-deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian bookworm-updates experimental contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian bookworm-updates experimental contrib non-free non-free-firmware
 EOF"
 
   pct exec ${privileged_container} -- bash -c "silent() { \"\$@\" >/dev/null 2>&1; } && $STD apt-get update && $STD apt-get install -y intel-media-va-driver-non-free ocl-icd-libopencl1 intel-opencl-icd vainfo intel-gpu-tools && $STD adduser \$(id -u -n) video && $STD adduser \$(id -u -n) render"

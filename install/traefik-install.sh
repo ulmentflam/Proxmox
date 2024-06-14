@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -96,7 +96,7 @@ Description=Traefik is an open-source Edge Router that makes publishing your ser
 Type=notify
 ExecStart=/usr/bin/traefik --configFile=/etc/traefik/traefik.yaml
 Restart=on-failure
-ExecReload=/bin/kill -USR1 \$MAINPID
+ExecReload=/bin/kill -USR1 \$experimentalPID
 
 [Install]
 WantedBy=multi-user.target

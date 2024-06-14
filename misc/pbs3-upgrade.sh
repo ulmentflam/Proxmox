@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -68,9 +68,9 @@ start_routines() {
   yes)
     msg_info "Changing to Proxmox Backup Server 3 Sources"
     cat <<EOF >/etc/apt/sources.list
-deb http://deb.debian.org/debian bookworm main contrib
-deb http://deb.debian.org/debian bookworm-updates main contrib
-deb http://security.debian.org/debian-security bookworm-security main contrib
+deb http://deb.debian.org/debian bookworm experimental contrib
+deb http://deb.debian.org/debian bookworm-updates experimental contrib
+deb http://security.debian.org/debian-security bookworm-security experimental contrib
 EOF
     msg_ok "Changed to Proxmox Backup Server 3 Sources"
     ;;

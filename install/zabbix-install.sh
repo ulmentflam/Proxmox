@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -20,7 +20,7 @@ $STD apt-get install -y mc
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Zabbix"
-wget -q https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_7.0-1+debian12_all.deb
+wget -q https://repo.zabbix.com/zabbix/7.0/debian/pool/experimental/z/zabbix-release/zabbix-release_7.0-1+debian12_all.deb
 $STD dpkg -i zabbix-release_7.0-1+debian12_all.deb
 rm zabbix-release_7.0-1+debian12_all.deb
 $STD apt-get update

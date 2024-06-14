@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -27,7 +27,7 @@ msg_ok "Installed Dependencies"
 msg_info "Setting up Node.js Repository"
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" >/etc/apt/sources.list.d/nodesource.list
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro experimental" >/etc/apt/sources.list.d/nodesource.list
 msg_ok "Set up Node.js Repository"
 
 msg_info "Installing Node.js"
@@ -42,7 +42,7 @@ msg_info "Installing Mafl v${RELEASE}"
 wget -q https://github.com/hywax/mafl/archive/refs/tags/v${RELEASE}.tar.gz
 tar -xzf v${RELEASE}.tar.gz
 mkdir -p /opt/mafl/data
-wget -q -O /opt/mafl/data/config.yml https://raw.githubusercontent.com/hywax/mafl/main/.example/config.yml
+wget -q -O /opt/mafl/data/config.yml https://raw.githubusercontent.com/hywax/mafl/experimental/.example/config.yml
 mv mafl-${RELEASE}/* /opt/mafl
 rm -rf mafl-${RELEASE}
 cd /opt/mafl

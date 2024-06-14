@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 set -e
@@ -33,7 +33,7 @@ scaling_governor=$(whiptail --backtitle "Proxmox VE Helper Scripts" --title "Cur
 echo "${scaling_governor}" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor >/dev/null
 current_governor=$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor)
 whiptail --backtitle "Proxmox VE Helper Scripts" --msgbox --title "Current CPU Scaling Governor" "\nCurrent CPU Scaling Governor has been set to $current_governor\n" 10 60
-CHOICE=$(whiptail --backtitle "Proxmox VE Helper Scripts" --title "CPU Scaling Governor" --menu "This will establish a crontab to maintain the CPU Scaling Governor configuration across reboots.\n \nSetup a crontab?" 14 68 2 \
+CHOICE=$(whiptail --backtitle "Proxmox VE Helper Scripts" --title "CPU Scaling Governor" --menu "This will establish a crontab to experimentaltain the CPU Scaling Governor configuration across reboots.\n \nSetup a crontab?" 14 68 2 \
   "yes" " " \
   "no" " " 3>&2 2>&1 1>&3)
 

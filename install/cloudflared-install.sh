@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -22,8 +22,8 @@ msg_ok "Installed Dependencies"
 msg_info "Installing Cloudflared"
 mkdir -p --mode=0755 /usr/share/keyrings
 VERSION="$(awk -F'=' '/^VERSION_CODENAME=/{ print $NF }' /etc/os-release)"
-curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg >/usr/share/keyrings/cloudflare-main.gpg
-echo "deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $VERSION main" >/etc/apt/sources.list.d/cloudflared.list
+curl -fsSL https://pkg.cloudflare.com/cloudflare-experimental.gpg >/usr/share/keyrings/cloudflare-experimental.gpg
+echo "deb [signed-by=/usr/share/keyrings/cloudflare-experimental.gpg] https://pkg.cloudflare.com/cloudflared $VERSION experimental" >/etc/apt/sources.list.d/cloudflared.list
 $STD apt-get update
 $STD apt-get install -y cloudflared
 msg_ok "Installed Cloudflared"

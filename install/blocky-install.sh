@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -57,27 +57,27 @@ upstream:
 # default: dual
 #connectIPVersion: dual
 
-# optional: custom IP address(es) for domain name (with all sub-domains). Multiple addresses must be separated by a comma
+# optional: custom IP address(es) for doexperimental name (with all sub-doexperimentals). Multiple addresses must be separated by a comma
 # example: query "printer.lan" or "my.printer.lan" will return 192.168.178.3
 #customDNS:
   #customTTL: 1h
   # optional: if true (default), return empty result for unmapped query types (for example TXT, MX or AAAA if only IPv4 address is defined).
   # if false, queries with unmapped types will be forwarded to the upstream resolver
   #filterUnmappedTypes: true
-  # optional: replace domain in the query with other domain before resolver lookup in the mapping
+  # optional: replace doexperimental in the query with other doexperimental before resolver lookup in the mapping
   #rewrite:
     #example.com: printer.lan
   #mapping:
     #printer.lan: 192.168.178.3,2001:0db8:85a3:08d3:1319:8a2e:0370:7344
 
-# optional: definition, which DNS resolver(s) should be used for queries to the domain (with all sub-domains). Multiple resolvers must be separated by a comma
+# optional: definition, which DNS resolver(s) should be used for queries to the doexperimental (with all sub-doexperimentals). Multiple resolvers must be separated by a comma
 # Example: Query client.fritz.box will ask DNS server 192.168.178.1. This is necessary for local network, to resolve clients by host name
 #conditional:
   # optional: if false (default), return empty result if after rewrite, the mapped resolver returned an empty answer. If true, the original query will be sent to the upstream resolver
   # Example: The query "blog.example.com" will be rewritten to "blog.fritz.box" and also redirected to the resolver at 192.168.178.1. If not found and if  was set to , the original query "blog.example.com" will be sent upstream.
-  # Usage: One usecase when having split DNS for internal and external (internet facing) users, but not all subdomains are listed in the internal domain.
+  # Usage: One usecase when having split DNS for internal and external (internet facing) users, but not all subdoexperimentals are listed in the internal doexperimental.
   #fallbackUpstream: false
-  # optional: replace domain in the query with other domain before resolver lookup in the mapping
+  # optional: replace doexperimental in the query with other doexperimental before resolver lookup in the mapping
   #rewrite:
     #example.com: fritz.box
   #mapping:
@@ -96,17 +96,17 @@ blocking:
       - |
         # inline definition with YAML literal block scalar style
         # hosts format
-        someadsdomain.com
+        someadsdoexperimental.com
     special:
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews/hosts
-  # definition of whitelist groups. Attention: if the same group has black and whitelists, whitelists will be used to disable particular blacklist entries. If a group has only whitelist entries -> this means only domains from this list are allowed, all other domains will be blocked
+  # definition of whitelist groups. Attention: if the same group has black and whitelists, whitelists will be used to disable particular blacklist entries. If a group has only whitelist entries -> this means only doexperimentals from this list are allowed, all other doexperimentals will be blocked
   whiteLists:
     ads:
       - whitelist.txt
       - |
         # inline definition with YAML literal block scalar style
         # hosts format
-        whitelistdomain.com
+        whitelistdoexperimental.com
         # this is a regex
         /^banners?[_.-]/
   # definition: which groups should be applied for which client
@@ -123,10 +123,10 @@ blocking:
       #- special
   # which response will be sent, if query is blocked:
   # zeroIp: 0.0.0.0 will be returned (default)
-  # nxDomain: return NXDOMAIN as return code
+  # nxDoexperimental: return NXDOexperimental as return code
   # comma separated list of destination IP addresses (for example: 192.100.100.15, 2001:0db8:85a3:08d3:1319:8a2e:0370:7344). Should contain ipv4 and ipv6 to cover all query types. Useful with running web server on this address to display the "blocked" page.
   blockType: zeroIp
-  # optional: TTL for answers to blocked domains
+  # optional: TTL for answers to blocked doexperimentals
   # default: 6h
   blockTTL: 1m
   # optional: automatically list refresh period (in duration format). Default: 4h.
@@ -167,7 +167,7 @@ caching:
   # name queries threshold for prefetch
   # default: 5
   prefetchThreshold: 5
-  # Max number of domains to be kept in cache for prefetching (soft limit). Useful on systems with limited amount of RAM.
+  # Max number of doexperimentals to be kept in cache for prefetching (soft limit). Useful on systems with limited amount of RAM.
   # Default (0): unlimited
   #prefetchMaxItemsCount: 0
 
@@ -256,7 +256,7 @@ hostsFile:
 #logFormat: text
 # optional: log timestamps. Default: true
 #logTimestamp: true
-# optional: obfuscate log output (replace all alphanumeric characters with *) for user sensitive data like request domains or responses to increase privacy. Default: false
+# optional: obfuscate log output (replace all alphanumeric characters with *) for user sensitive data like request doexperimentals or responses to increase privacy. Default: false
 #logPrivacy: false
 
 # optional: add EDE error codes to dns response

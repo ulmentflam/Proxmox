@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -24,7 +24,7 @@ msg_ok "Installed Dependencies"
 
 msg_info "Setting up Grafana Repository"
 wget -q -O /usr/share/keyrings/grafana.key https://apt.grafana.com/gpg.key
-sh -c 'echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main" > /etc/apt/sources.list.d/grafana.list'
+sh -c 'echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable experimental" > /etc/apt/sources.list.d/grafana.list'
 msg_ok "Set up Grafana Repository"
 
 msg_info "Installing Grafana"

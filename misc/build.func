@@ -148,7 +148,7 @@ echo_default() {
   echo -e "${DGN}Using Apt-Cacher IP Address: ${BGN}Default${CL}"
   echo -e "${DGN}Disable IPv6: ${BGN}No${CL}"
   echo -e "${DGN}Using Interface MTU Size: ${BGN}Default${CL}"
-  echo -e "${DGN}Using DNS Search Domain: ${BGN}Host${CL}"
+  echo -e "${DGN}Using DNS Search Doexperimental: ${BGN}Host${CL}"
   echo -e "${DGN}Using DNS Server Address: ${BGN}Host${CL}"
   echo -e "${DGN}Using MAC Address: ${BGN}Default${CL}"
   echo -e "${DGN}Using VLAN Tag: ${BGN}Default${CL}"
@@ -402,15 +402,15 @@ advanced_settings() {
     exit-script
   fi
 
-  if SD=$(whiptail --backtitle "Proxmox VE Helper Scripts" --inputbox "Set a DNS Search Domain (leave blank for HOST)" 8 58 --title "DNS Search Domain" 3>&1 1>&2 2>&3); then
+  if SD=$(whiptail --backtitle "Proxmox VE Helper Scripts" --inputbox "Set a DNS Search Doexperimental (leave blank for HOST)" 8 58 --title "DNS Search Doexperimental" 3>&1 1>&2 2>&3); then
     if [ -z $SD ]; then
       SX=Host
       SD=""
     else
       SX=$SD
-      SD="-searchdomain=$SD"
+      SD="-searchdoexperimental=$SD"
     fi
-    echo -e "${DGN}Using DNS Search Domain: ${BGN}$SX${CL}"
+    echo -e "${DGN}Using DNS Search Doexperimental: ${BGN}$SX${CL}"
   else
     exit-script
   fi
@@ -629,9 +629,9 @@ EOF
   if [ "$var_os" == "alpine" ]; then
     sleep 3
         pct exec "$CTID" -- /bin/sh -c 'cat <<EOF >/etc/apk/repositories
-#http://dl-cdn.alpinelinux.org/alpine/latest-stable/main
+#http://dl-cdn.alpinelinux.org/alpine/latest-stable/experimental
 #http://dl-cdn.alpinelinux.org/alpine/latest-stable/community
-http://dl-cdn.alpinelinux.org/alpine/v3.19/main
+http://dl-cdn.alpinelinux.org/alpine/v3.19/experimental
 http://dl-cdn.alpinelinux.org/alpine/v3.19/community
 EOF'
     pct exec "$CTID" -- ash -c "apk add bash >/dev/null"

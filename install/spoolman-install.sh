@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
@@ -57,7 +57,7 @@ After=network.target
 Type=simple
 WorkingDirectory=/opt/spoolman
 EnvironmentFile=/opt/spoolman/.env
-ExecStart=uvicorn spoolman.main:app --host 0.0.0.0 --port 7912
+ExecStart=uvicorn spoolman.experimental:app --host 0.0.0.0 --port 7912
 Restart=always
 User=root
 [Install]

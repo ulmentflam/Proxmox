@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Authors: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Authors: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -24,7 +24,7 @@ msg_ok "Installed Python3 Dependencies"
 msg_info "Installing Node.js"
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" >/etc/apt/sources.list.d/nodesource.list
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro experimental" >/etc/apt/sources.list.d/nodesource.list
 $STD apt-get update
 $STD apt-get install -y nodejs
 msg_ok "Installed Node.js"
@@ -55,16 +55,16 @@ wget -q https://github.com/blakeblackshear/frigate/archive/refs/tags/${RELEASE}.
 tar -xzf frigate.tar.gz -C /opt/frigate --strip-components 1
 rm -rf frigate.tar.gz
 cd /opt/frigate
-$STD pip3 wheel --wheel-dir=/wheels -r /opt/frigate/docker/main/requirements-wheels.txt
-cp -a /opt/frigate/docker/main/rootfs/. /
+$STD pip3 wheel --wheel-dir=/wheels -r /opt/frigate/docker/experimental/requirements-wheels.txt
+cp -a /opt/frigate/docker/experimental/rootfs/. /
 export TARGETARCH="amd64"
 echo 'libc6 libraries/restart-without-asking boolean true' | debconf-set-selections
-$STD /opt/frigate/docker/main/install_deps.sh
+$STD /opt/frigate/docker/experimental/install_deps.sh
 $STD ln -svf /usr/lib/btbn-ffmpeg/bin/ffmpeg /usr/local/bin/ffmpeg
 $STD ln -svf /usr/lib/btbn-ffmpeg/bin/ffprobe /usr/local/bin/ffprobe
 $STD pip3 install -U /wheels/*.whl
 ldconfig
-$STD pip3 install -r /opt/frigate/docker/main/requirements-dev.txt
+$STD pip3 install -r /opt/frigate/docker/experimental/requirements-dev.txt
 $STD /opt/frigate/.devcontainer/initialize.sh
 $STD make version
 cd /opt/frigate/web
@@ -72,7 +72,7 @@ $STD npm install
 $STD npm run build
 cp -r /opt/frigate/web/dist/* /opt/frigate/web/
 cp -r /opt/frigate/config/. /config
-sed -i '/^s6-svc -O \.$/s/^/#/' /opt/frigate/docker/main/rootfs/etc/s6-overlay/s6-rc.d/frigate/run
+sed -i '/^s6-svc -O \.$/s/^/#/' /opt/frigate/docker/experimental/rootfs/etc/s6-overlay/s6-rc.d/frigate/run
 cat <<EOF >/config/config.yml
 mqtt:
   enabled: false
@@ -103,7 +103,7 @@ msg_ok "Installed Frigate $RELEASE"
 if grep -q -o -m1 'avx[^ ]*' /proc/cpuinfo; then
   msg_ok "AVX Support Detected"
   msg_info "Installing Openvino Object Detection Model (Resilience)"
-  $STD pip install -r /opt/frigate/docker/main/requirements-ov.txt
+  $STD pip install -r /opt/frigate/docker/experimental/requirements-ov.txt
   cd /opt/frigate/models
   export ENABLE_ANALYTICS=NO
   $STD /usr/local/bin/omz_downloader --name ssdlite_mobilenet_v2 --num_attempts 2
@@ -162,10 +162,10 @@ wget -qO /media/frigate/person-bicycle-car-detection.mp4 https://github.com/inte
 msg_ok "Installed Coral Object Detection Model"
 
 msg_info "Building Nginx with Custom Modules"
-$STD /opt/frigate/docker/main/build_nginx.sh
-sed -i 's/exec nginx/exec \/usr\/local\/nginx\/sbin\/nginx/g' /opt/frigate/docker/main/rootfs/etc/s6-overlay/s6-rc.d/nginx/run
+$STD /opt/frigate/docker/experimental/build_nginx.sh
+sed -i 's/exec nginx/exec \/usr\/local\/nginx\/sbin\/nginx/g' /opt/frigate/docker/experimental/rootfs/etc/s6-overlay/s6-rc.d/nginx/run
 sed -i 's/error_log \/dev\/stdout warn\;/error_log \/dev\/shm\/logs\/nginx\/current warn\;/' /usr/local/nginx/conf/nginx.conf
-sed -i 's/access_log \/dev\/stdout main\;/access_log \/dev\/shm\/logs\/nginx\/current main\;/' /usr/local/nginx/conf/nginx.conf
+sed -i 's/access_log \/dev\/stdout experimental\;/access_log \/dev\/shm\/logs\/nginx\/current experimental\;/' /usr/local/nginx/conf/nginx.conf
 msg_ok "Built Nginx"
 
 msg_info "Creating Services"
@@ -195,7 +195,7 @@ Restart=always
 RestartSec=1
 User=root
 ExecStartPre=+rm /dev/shm/logs/go2rtc/current
-ExecStart=bash /opt/frigate/docker/main/rootfs/etc/s6-overlay/s6-rc.d/go2rtc/run
+ExecStart=bash /opt/frigate/docker/experimental/rootfs/etc/s6-overlay/s6-rc.d/go2rtc/run
 StandardOutput=file:/dev/shm/logs/go2rtc/current
 StandardError=file:/dev/shm/logs/go2rtc/current
 
@@ -217,7 +217,7 @@ Restart=always
 RestartSec=1
 User=root
 ExecStartPre=+rm /dev/shm/logs/frigate/current
-ExecStart=bash /opt/frigate/docker/main/rootfs/etc/s6-overlay/s6-rc.d/frigate/run
+ExecStart=bash /opt/frigate/docker/experimental/rootfs/etc/s6-overlay/s6-rc.d/frigate/run
 StandardOutput=file:/dev/shm/logs/frigate/current
 StandardError=file:/dev/shm/logs/frigate/current
 
@@ -239,7 +239,7 @@ Restart=always
 RestartSec=1
 User=root
 ExecStartPre=+rm /dev/shm/logs/nginx/current
-ExecStart=bash /opt/frigate/docker/main/rootfs/etc/s6-overlay/s6-rc.d/nginx/run
+ExecStart=bash /opt/frigate/docker/experimental/rootfs/etc/s6-overlay/s6-rc.d/nginx/run
 StandardOutput=file:/dev/shm/logs/nginx/current
 StandardError=file:/dev/shm/logs/nginx/current
 

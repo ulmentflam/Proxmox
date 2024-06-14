@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 source <(curl -s https://raw.githubusercontent.com/ulmentflam/Proxmox/experimental/misc/build.func)
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -54,7 +54,7 @@ function default_settings() {
 
 function update_script() {
 header_info
-if [[ ! -f /lib/systemd/system/nextcloud-domain.service ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
+if [[ ! -f /lib/systemd/system/nextcloud-doexperimental.service ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
 msg_info "Updating ${APP} LXC"
 apt-get update &>/dev/null
 apt-get -y upgrade &>/dev/null

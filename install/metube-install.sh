@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
@@ -44,7 +44,7 @@ msg_ok "Installed Python3"
 msg_info "Setting up Node.js Repository"
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" >/etc/apt/sources.list.d/nodesource.list
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro experimental" >/etc/apt/sources.list.d/nodesource.list
 msg_ok "Set up Node.js Repository"
 
 msg_info "Installing Node.js"
@@ -79,7 +79,7 @@ After=network.target
 Type=simple
 WorkingDirectory=/opt/metube
 EnvironmentFile=/opt/metube/.env
-ExecStart=/usr/local/bin/pipenv run python3 app/main.py
+ExecStart=/usr/local/bin/pipenv run python3 app/experimental.py
 Restart=always
 User=root
 

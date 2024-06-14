@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -63,7 +63,7 @@ pct exec "$CTID" -- bash -c '
 ID=$(grep "^ID=" /etc/os-release | cut -d"=" -f2)
 VER=$(grep "^VERSION_CODENAME=" /etc/os-release | cut -d"=" -f2)
 wget -qO- https://pkgs.tailscale.com/stable/$ID/$VER.noarmor.gpg >/usr/share/keyrings/tailscale-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/tailscale-archive-keyring.gpg] https://pkgs.tailscale.com/stable/$ID $VER main" >/etc/apt/sources.list.d/tailscale.list
+echo "deb [signed-by=/usr/share/keyrings/tailscale-archive-keyring.gpg] https://pkgs.tailscale.com/stable/$ID $VER experimental" >/etc/apt/sources.list.d/tailscale.list
 apt-get update &>/dev/null
 apt-get install -y tailscale &>/dev/null
 ' || exit

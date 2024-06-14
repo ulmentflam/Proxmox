@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -50,9 +50,9 @@ start_routines() {
   whiptail --backtitle "Proxmox VE Helper Scripts" --msgbox --title "PVE8 SOURCES" "This will set the correct sources to update and install Proxmox VE 8." 10 58
     msg_info "Changing to Proxmox VE 8 Sources"
     cat <<EOF >/etc/apt/sources.list
-deb http://ftp.debian.org/debian bookworm main contrib
-deb http://ftp.debian.org/debian bookworm-updates main contrib
-deb http://security.debian.org/debian-security bookworm-security main contrib
+deb http://ftp.debian.org/debian bookworm experimental contrib
+deb http://ftp.debian.org/debian bookworm-updates experimental contrib
+deb http://security.debian.org/debian-security bookworm-security experimental contrib
 EOF
     msg_ok "Changed to Proxmox VE 8 Sources"
 

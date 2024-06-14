@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 source <(curl -s https://raw.githubusercontent.com/ulmentflam/Proxmox/experimental/misc/build.func)
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -57,7 +57,7 @@ header_info
 if [[ ! -d /opt/Sonarr ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
 msg_info "Updating $APP v4"
 systemctl stop sonarr.service
-wget -q -O SonarrV4.tar.gz 'https://services.sonarr.tv/v1/download/main/latest?version=4&os=linux&arch=x64'
+wget -q -O SonarrV4.tar.gz 'https://services.sonarr.tv/v1/download/experimental/latest?version=4&os=linux&arch=x64'
 tar -xzf SonarrV4.tar.gz
 rm -rf /opt/Sonarr
 mv Sonarr /opt

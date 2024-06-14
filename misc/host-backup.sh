@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -65,11 +65,11 @@ function perform_backup {
   tar -czf "$BACKUP_PATH$BACKUP_FILE-$(date +%Y_%m_%d).tar.gz" --absolute-names "${selected_directories[@]}"
   header_info
   echo -e "\nFinished"
-  echo -e "\e[1;33m \nA backup is rendered ineffective when it remains stored on the host.\n \e[0m"
+  echo -e "\e[1;33m \nA backup is rendered ineffective when it reexperimentals stored on the host.\n \e[0m"
   sleep 2
 }
 
-# Main script execution loop
+# experimental script execution loop
 while true; do
   if (whiptail --backtitle "Proxmox VE Helper Scripts" --title "Proxmox VE Host Backup" --yesno "This will create backups for particular files and directories located within a designated directory. Proceed?" 10 88); then
     perform_backup

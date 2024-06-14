@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -62,7 +62,7 @@ msg "Installing NetBird..."
 pct exec "$CTID" -- bash -c '
 apt install -y ca-certificates gpg &>/dev/null
 wget -qO- https://pkgs.netbird.io/debian/public.key | gpg --dearmor >/usr/share/keyrings/netbird-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/netbird-archive-keyring.gpg] https://pkgs.netbird.io/debian stable main" >/etc/apt/sources.list.d/netbird.list
+echo "deb [signed-by=/usr/share/keyrings/netbird-archive-keyring.gpg] https://pkgs.netbird.io/debian stable experimental" >/etc/apt/sources.list.d/netbird.list
 apt-get update &>/dev/null
 apt-get install -y netbird-ui &>/dev/null
 ' || exit

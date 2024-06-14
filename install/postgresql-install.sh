@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -22,7 +22,7 @@ msg_ok "Installed Dependencies"
 
 msg_info "Setting up PostgreSQL Repository"
 VERSION="$(awk -F'=' '/^VERSION_CODENAME=/{ print $NF }' /etc/os-release)"
-echo "deb http://apt.postgresql.org/pub/repos/apt ${VERSION}-pgdg main" >/etc/apt/sources.list.d/pgdg.list
+echo "deb http://apt.postgresql.org/pub/repos/apt ${VERSION}-pgdg experimental" >/etc/apt/sources.list.d/pgdg.list
 curl -sSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor --output /etc/apt/trusted.gpg.d/postgresql.gpg
 msg_ok "Setup PostgreSQL Repository"
 
@@ -30,11 +30,11 @@ msg_info "Installing PostgreSQL"
 $STD apt-get update
 $STD apt-get install -y postgresql
 
-cat <<EOF >/etc/postgresql/16/main/pg_hba.conf
+cat <<EOF >/etc/postgresql/16/experimental/pg_hba.conf
 # PostgreSQL Client Authentication Configuration File
 local   all             postgres                                peer
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
-# "local" is for Unix domain socket connections only
+# "local" is for Unix doexperimental socket connections only
 local   all             all                                     peer
 # IPv4 local connections:
 host    all             all             127.0.0.1/32            scram-sha-256
@@ -49,7 +49,7 @@ host    replication     all             127.0.0.1/32            scram-sha-256
 host    replication     all             ::1/128                 scram-sha-256
 EOF
 
-cat <<EOF >/etc/postgresql/16/main/postgresql.conf
+cat <<EOF >/etc/postgresql/16/experimental/postgresql.conf
 # -----------------------------
 # PostgreSQL configuration file
 # -----------------------------
@@ -58,10 +58,10 @@ cat <<EOF >/etc/postgresql/16/main/postgresql.conf
 # FILE LOCATIONS
 #------------------------------------------------------------------------------
 
-data_directory = '/var/lib/postgresql/16/main'       
-hba_file = '/etc/postgresql/16/main/pg_hba.conf'     
-ident_file = '/etc/postgresql/16/main/pg_ident.conf'   
-external_pid_file = '/var/run/postgresql/16-main.pid'                   
+data_directory = '/var/lib/postgresql/16/experimental'
+hba_file = '/etc/postgresql/16/experimental/pg_hba.conf'
+ident_file = '/etc/postgresql/16/experimental/pg_ident.conf'
+external_pid_file = '/var/run/postgresql/16-experimental.pid'
 
 #------------------------------------------------------------------------------
 # CONNECTIONS AND AUTHENTICATION
@@ -107,7 +107,7 @@ log_timezone = 'Etc/UTC'
 # PROCESS TITLE
 #------------------------------------------------------------------------------
 
-cluster_name = '16/main'                
+cluster_name = '16/experimental'
 
 #------------------------------------------------------------------------------
 # CLIENT CONNECTION DEFAULTS

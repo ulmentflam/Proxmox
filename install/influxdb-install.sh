@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -25,7 +25,7 @@ msg_ok "Installed Dependencies"
 msg_info "Setting up InfluxDB Repository"
 wget -q https://repos.influxdata.com/influxdata-archive_compat.key
 cat influxdata-archive_compat.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg > /dev/null
-sh -c 'echo "deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable main" > /etc/apt/sources.list.d/influxdata.list'
+sh -c 'echo "deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable experimental" > /etc/apt/sources.list.d/influxdata.list'
 msg_ok "Set up InfluxDB Repository"
 
 read -r -p "Which version of InfluxDB to install? (1 or 2) " prompt

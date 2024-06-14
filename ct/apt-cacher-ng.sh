@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 source <(curl -s https://raw.githubusercontent.com/ulmentflam/Proxmox/experimental/misc/build.func)
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -68,5 +68,5 @@ build_container
 description
 
 msg_ok "Completed Successfully!\n"
-echo -e "${APP} maintenance page should be reachable by going to the following URL.
+echo -e "${APP} experimentaltenance page should be reachable by going to the following URL.
          ${BL}http://${IP}:3142/acng-report.html${CL} \n"

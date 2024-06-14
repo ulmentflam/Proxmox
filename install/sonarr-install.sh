@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -23,7 +23,7 @@ msg_ok "Installed Dependencies"
 msg_info "Installing Sonarr v4"
 mkdir -p /var/lib/sonarr/
 chmod 775 /var/lib/sonarr/
-wget -q -O SonarrV4.tar.gz 'https://services.sonarr.tv/v1/download/main/latest?version=4&os=linux&arch=x64'
+wget -q -O SonarrV4.tar.gz 'https://services.sonarr.tv/v1/download/experimental/latest?version=4&os=linux&arch=x64'
 tar -xzf SonarrV4.tar.gz
 mv Sonarr /opt
 rm -rf SonarrV4.tar.gz

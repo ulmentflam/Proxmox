@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 ulmentflam
+# Author: ulmentflam (ulmentflamster)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
@@ -31,7 +31,7 @@ msg_ok "Installed k0s Kubernetes"
 read -r -p "Would you like to add Helm Package Manager? <y/N> " prompt
 if [[ "${prompt,,}" =~ ^(y|yes)$ ]]; then
 msg_info "Installing Helm"
-$STD bash <(curl -sSLf https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3)
+$STD bash <(curl -sSLf https://raw.githubusercontent.com/helm/helm/experimental/scripts/get-helm-3)
 msg_ok "Installed Helm"
 fi
 motd_ssh

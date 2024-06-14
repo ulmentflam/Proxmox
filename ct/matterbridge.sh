@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 source <(curl -s https://raw.githubusercontent.com/ulmentflam/Proxmox/experimental/misc/build.func)
-# Copyright (c) 2021-2024 tteck
+# Copyright (c) 2021-2024 ulmentflam
 # Author: MickLesk (Canbiz)
 # License: MIT
 # https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
