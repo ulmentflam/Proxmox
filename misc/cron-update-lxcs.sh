@@ -31,7 +31,7 @@ add() {
 }
 
 remove() {
-  (crontab -l | grep -v "github.com/tteck/Proxmox/raw/main/misc/update-lxcs-cron.sh") | crontab -
+  (crontab -l | grep -v "github.com/ulmentflam/Proxmox/raw/experimental/misc/update-lxcs-cron.sh") | crontab -
   rm -rf /var/log/update-lxcs-cron.log
   echo "Removed Crontab Schedule from Proxmox VE"
 }
