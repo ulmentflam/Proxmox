@@ -9,14 +9,11 @@ source <(curl -s https://raw.githubusercontent.com/tteck/Proxmox/main/misc/build
 function header_info {
 clear
 cat <<"EOF"
- ________  ___       ___       ________  _____ ______   ________
-|\   __  \|\  \     |\  \     |\   __  \|\   _ \  _   \|\   __  \
-\ \  \|\  \ \  \    \ \  \    \ \  \|\  \ \  \\\__\ \  \ \  \|\  \
- \ \  \\\  \ \  \    \ \  \    \ \   __  \ \  \\|__| \  \ \   __  \
-  \ \  \\\  \ \  \____\ \  \____\ \  \ \  \ \  \    \ \  \ \  \ \  \
-   \ \_______\ \_______\ \_______\ \__\ \__\ \__\    \ \__\ \__\ \__\
-    \|_______|\|_______|\|_______|\|__|\|__|\|__|     \|__|\|__|\|__|
-
+   ____  ____
+  / __ \/ / /___ _____ ___  ____ _
+ / / / / / / __ `/ __ `__ \/ __ `/
+/ /_/ / / / /_/ / / / / / / /_/ /
+\____/_/_/\__,_/_/ /_/ /_/\__,_/
 
 EOF
 }
@@ -61,7 +58,7 @@ header_info
 if [[ ! -f /etc/systemd/system/ollama.service ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
 msg_info "Updating $APP LXC"
 apt-get update &>/dev/null
-curl -fsSL https://ollama.com/install.sh | sh
+curl -L https://ollama.com/download/ollama-linux-amd64 -o /usr/bin/ollama
 msg_ok "Updated $APP LXC"
 exit
 }

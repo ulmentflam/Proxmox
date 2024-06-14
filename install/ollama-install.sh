@@ -20,10 +20,28 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 msg_ok "Installed Dependencies"
 
-msg_info "Installing Ollama & Creating Service"
-$STD curl -fsSL https://ollama.com/install.sh | sh
+msg_info "Installing Ollama"
+$STD curl -L https://ollama.com/download/ollama-linux-amd64 -o /usr/bin/ollama
+$STD chmod +x /usr/bin/ollama
+msg_ok "Installed Ollama"
+
+msg_info "Creating Service"
+service_path="/etc/systemd/system/ollama.service"
+echo "[Unit]
+Description=Ollama Service
+Documentation=man:ollama
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ollama
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target" >$service_path
 systemctl enable -q --now ollama.service
-msg_ok "Installed Ollama & Created Service"
+msg_ok "Created Service"
 
 motd_ssh
 customize
