@@ -34,12 +34,14 @@ After=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/ollama
+Environment=OLLAMA_HOST=0.0.0.0:11434
+ExecStart=/usr/bin/ollama serve
 Restart=always
 RestartSec=3
 
 [Install]
 WantedBy=multi-user.target" >$service_path
+systemctl -q daemon-reload
 systemctl enable -q --now ollama.service
 msg_ok "Created Service"
 
