@@ -4,7 +4,7 @@ source <(curl -s https://raw.githubusercontent.com/ulmentflam/Proxmox/experiment
 # Author: tteck
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 # Source: https://github.com/matze/wastebin
 
 

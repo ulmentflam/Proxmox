@@ -4,7 +4,7 @@ source <(curl -s https://raw.githubusercontent.com/ulmentflam/Proxmox/experiment
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/ulmentflam/Proxmox/raw/experimental/LICENSE
 
 function header_info {
 clear
