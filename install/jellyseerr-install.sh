@@ -33,15 +33,15 @@ $STD apt-get update
 $STD apt-get install -y nodejs
 msg_ok "Installed Node.js"
 
-msg_info "Installing Yarn"
-$STD npm install -g yarn
-msg_ok "Installed Yarn"
+msg_info "Installing pnpm"
+$STD npm install -g pnpm
+msg_ok "Installed pnpm"
 
 msg_info "Installing Jellyseerr (Patience)"
 git clone -q https://github.com/Fallenbagel/jellyseerr.git /opt/jellyseerr
 cd /opt/jellyseerr
-$STD yarn install
-$STD yarn build
+CYPRESS_INSTALL_BINARY=0 pnpm install --frozen-lockfile &>/dev/null
+$STD pnpm build
 mkdir -p /etc/jellyseerr/
 cat <<EOF >/etc/jellyseerr/jellyseerr.conf
 PORT=5055
@@ -53,15 +53,17 @@ msg_ok "Installed Jellyseerr"
 msg_info "Creating Service"
 cat <<EOF >/etc/systemd/system/jellyseerr.service
 [Unit]
-Description=jellyseerr Service
-After=network.target
+Description=Jellyseerr Service
+Wants=network-online.target
+After=network-online.target
 
 [Service]
 EnvironmentFile=/etc/jellyseerr/jellyseerr.conf
 Environment=NODE_ENV=production
 Type=exec
+Restart=on-failure
 WorkingDirectory=/opt/jellyseerr
-ExecStart=/usr/bin/yarn start
+ExecStart=/usr/bin/node dist/index.js
 
 [Install]
 WantedBy=multi-user.target
