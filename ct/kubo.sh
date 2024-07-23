@@ -2,26 +2,26 @@
 source <(curl -s https://raw.githubusercontent.com/tteck/Proxmox/main/misc/build.func)
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
+# Co-Author: ulmentflam
 # License: MIT
 # https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 function header_info {
 clear
 cat <<"EOF"
-  ______                _____ __  
- /_  __/________ ____  / __(_) /__
-  / / / ___/ __ `/ _ \/ /_/ / //_/
- / / / /  / /_/ /  __/ __/ / ,<   
-/_/ /_/   \__,_/\___/_/ /_/_/|_|  
-
+    __ __      __
+   / //_/_  __/ /_  ____
+  / ,< / / / / __ \/ __ \
+ / /| / /_/ / /_/ / /_/ /
+/_/ |_\__,_/_.___/\____/
 EOF
 }
 header_info
 echo -e "Loading..."
-APP="Traefik"
-var_disk="2"
-var_cpu="1"
-var_ram="512"
+APP="Kubo"
+var_disk="4"
+var_cpu="2"
+var_ram="4096"
 var_os="debian"
 var_version="12"
 variables
@@ -54,14 +54,17 @@ function default_settings() {
 
 function update_script() {
 header_info
-if [[ ! -f /etc/systemd/system/traefik.service ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
-RELEASE=3.0.4 #$(curl -s https://api.github.com/repos/traefik/traefik/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
-msg_info "Updating $APP LXC"
+if [[ ! -f /usr/local/kubo ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
+RELEASE=$(wget -q https://github.com/ipfs/kubo/releases/latest -O - | grep "title>Release" | cut -d " " -f 4)
 if [[ "${RELEASE}" != "$(cat /opt/${APP}_version.txt)" ]] || [[ ! -f /opt/${APP}_version.txt ]]; then
-  wget -q https://github.com/traefik/traefik/releases/download/v${RELEASE}/traefik_v${RELEASE}_linux_amd64.tar.gz
-  tar -C /tmp -xzf traefik*.tar.gz
-  mv /tmp/traefik /usr/bin/
-  rm -rf traefik*.tar.gz
+  msg_info "Updating $APP LXC"
+  apt-get update &>/dev/null
+  apt-get -y upgrade &>/dev/null
+  wget -q "https://github.com/ipfs/kubo/releases/download/${RELEASE}/kubo_${RELEASE}_linux-amd64.tar.gz"
+  tar -xzf "kubo_${RELEASE}_linux-amd64.tar.gz" -C /usr/local
+  systemctl restart ipfs.service
+  echo "${RELEASE}" >/opt/${APP}_version.txt
+  rm "kubo_${RELEASE}_linux-amd64.tar.gz"
   msg_ok "Updated $APP LXC"
 else
   msg_ok "No update required. ${APP} is already at ${RELEASE}"
@@ -75,4 +78,4 @@ description
 
 msg_ok "Completed Successfully!\n"
 echo -e "${APP} should be reachable by going to the following URL.
-         ${BL}http://${IP}:8080${CL} \n"
+         ${BL}http://${IP}:5001/webui ${CL} \n"
